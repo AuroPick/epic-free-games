@@ -1,0 +1,32 @@
+{
+  "name": "epic-free-games",
+  "version": "1.0.0",
+  "description": "Get weekly Epic Games free games",
+  "main": "lib/index.js",
+  "types": "lib",
+  "scripts": {
+    "build": "tsc -p ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AuroPick/epic-free-games.git"
+  },
+  "keywords": [
+    "epic",
+    "epic-games",
+    "free",
+    "games"
+  ],
+  "author": "Aykut Saki",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AuroPick/epic-free-games/issues"
+  },
+  "homepage": "https://github.com/AuroPick/epic-free-games#readme",
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
