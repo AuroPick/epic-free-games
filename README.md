@@ -9,8 +9,12 @@
 
 ## Installation
 
-```bash
+```js
 npm i epic-free-games
+
+// OR
+
+yarn add epic-free-games
 ```
 
 ## Usage
