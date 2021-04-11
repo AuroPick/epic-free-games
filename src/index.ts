@@ -1,8 +1,15 @@
 import axios from "axios";
 
-type ResultType = [{ currents: object[] }, { nexts: object[] }];
+type ResultType = { currents: object[]; nexts: object[] };
 
-const getGames = async (): Promise<ResultType> => {
+/**
+ * @author Aykut Saki <aykutsakisocial@gmail.com>
+ * @async
+ * @function
+ * @name getGames
+ * @returns currents: games that are currently free. nexts: announced games that will be free.
+ */
+export const getGames = async (): Promise<ResultType> => {
   const { data } = await axios.get(
     "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions"
   );
@@ -21,7 +28,5 @@ const getGames = async (): Promise<ResultType> => {
       Date.parse(game.effectiveDate) > Date.now()
   );
 
-  return [{ currents }, { nexts }];
+  return { currents, nexts };
 };
-
-export default getGames;
