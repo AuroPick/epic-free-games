@@ -2,6 +2,7 @@
 	<h1>Epic Games Free Games</h1>
   <a href="https://github.com/AuroPick/epic-free-games/blob/master/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/AuroPick/epic-free-games"></a>
   <a href="https://www.npmjs.com/package/epic-free-games"><img alt="npm" src="https://img.shields.io/npm/v/epic-free-games"></a>
+  <a href="https://www.npmjs.com/package/epic-free-games"><img alt="npm" src="https://img.shields.io/npm/dt/epic-free-games"></a>
   </br>
   </br>
 	<p><b>Get Weekly Epic Games Free Games</b></p>
