@@ -71,18 +71,39 @@ interface ObjectTypes {
 interface ResultType {
   currents: ObjectTypes[];
   nexts: ObjectTypes[];
-};
+}
+
+type CountryType =
+  | "TR"
+  | "US"
+  | "GB"
+  | "DE"
+  | "AR"
+  | "ES"
+  | "MX"
+  | "FR"
+  | "IT"
+  | "JP"
+  | "KR"
+  | "PL"
+  | "BR"
+  | "RU"
+  | "TH"
+  | "CN";
 
 /**
  * @author Aykut Saki <aykutsakisocial@gmail.com>
  * @async
  * @function
  * @name getGames
+ * @param {string} country ISO country code
  * @returns currents: games that are currently free. nexts: announced games that will be free.
  */
-export const getGames = async (): Promise<ResultType> => {
+export const getGames = async (
+  country: CountryType = "US"
+): Promise<ResultType> => {
   const { data } = await axios.get(
-    "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions"
+    `https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?country=${country}`
   );
 
   const freeGames: [] = data.data.Catalog.searchStore.elements.filter(

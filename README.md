@@ -29,11 +29,17 @@ import { getGames } from "epic-free-games"
 
 
 
-getGames().then(res => {
+getGames("US").then(res => {
   // Do something
 });
 
 ```
+
+## Function Parameters
+
+| Function    | Parameter           | Parameter Values                                                                               | Default Value  |
+| :---------: | :-----------------: | :--------------------------------------------------------------------------------------------: | :------------: |
+| getGames    | country: string     | "TR", "US", "GB", "DE", "AR", "ES", "MX", "FR", "IT", "JP", "KR", "PL", "BR", "RU", "TH", "CN" | "US"           |
 
 ## Sample Output
 

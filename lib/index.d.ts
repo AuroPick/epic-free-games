@@ -71,13 +71,15 @@ interface ResultType {
     currents: ObjectTypes[];
     nexts: ObjectTypes[];
 }
+declare type CountryType = "TR" | "US" | "GB" | "DE" | "AR" | "ES" | "MX" | "FR" | "IT" | "JP" | "KR" | "PL" | "BR" | "RU" | "TH" | "CN";
 /**
  * @author Aykut Saki <aykutsakisocial@gmail.com>
  * @async
  * @function
  * @name getGames
+ * @param {string} country ISO country code
  * @returns currents: games that are currently free. nexts: announced games that will be free.
  */
-export declare const getGames: () => Promise<ResultType>;
+export declare const getGames: (country?: CountryType) => Promise<ResultType>;
 export {};
 //# sourceMappingURL=index.d.ts.map
