@@ -102,23 +102,41 @@ type CountryType =
 export const getGames = async (
   country: CountryType = "US"
 ): Promise<ResultType> => {
-  const { data } = await axios.get(
-    `https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?country=${country}`
-  );
+  try {
+    const { data } = await axios.get(
+      `https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?country=${country}`
+    );
 
-  const freeGames: [] = data.data.Catalog.searchStore.elements.filter(
-    (game: { offerType: string }) => game.offerType === "BASE_GAME"
-  );
+    if (data?.errors) throw new TypeError("Invalid country code");
 
-  const currents: ObjectTypes[] = freeGames.filter(
-    (game: { effectiveDate: string }) =>
-      Date.parse(game.effectiveDate) < Date.now()
-  );
+    const freeGames: ObjectTypes[] = data.data.Catalog.searchStore.elements.filter(
+      (game: { offerType: string }) => game.offerType === "BASE_GAME"
+    );
 
-  const nexts: ObjectTypes[] = freeGames.filter(
-    (game: { effectiveDate: string }) =>
-      Date.parse(game.effectiveDate) > Date.now()
-  );
+    const currents: ObjectTypes[] = freeGames.filter(
+      (game: {
+        promotions: {} | null;
+        price: { totalPrice: { discountPrice: number } };
+      }) => {
+        return (
+          game.price.totalPrice.discountPrice === 0 && game.promotions !== null
+        );
+      }
+    );
 
-  return { currents, nexts };
+    const nexts: ObjectTypes[] = freeGames.filter(
+      (game: {
+        promotions: {} | null;
+        price: { totalPrice: { discountPrice: number } };
+      }) => {
+        return (
+          game.price.totalPrice.discountPrice !== 0 && game.promotions !== null
+        );
+      }
+    );
+
+    return { currents, nexts };
+  } catch (error) {
+    throw new Error(error);
+  }
 };
