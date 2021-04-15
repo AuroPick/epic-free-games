@@ -21,15 +21,17 @@ yarn add epic-free-games
 ## Usage
 
 ```js
-const { getGames } = require("epic-free-games")
+const { getGames } = require("epic-free-games");
 
 // OR
 
-import { getGames } from "epic-free-games"
+import { getGames } from "epic-free-games";
 
 
 
 getGames("US").then(res => {
+  // Do something
+}).catch(err => {
   // Do something
 });
 
