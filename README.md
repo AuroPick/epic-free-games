@@ -141,3 +141,10 @@ getGames("US").then(res => {
   ]
 }
 ```
+<hr/>
+
+> If you have any questions please do not hesitate to contact me.
+
+<hr/>
+
+> If you want to support me, you can give a star. That makes me happy.
