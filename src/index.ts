@@ -121,7 +121,7 @@ export const getGames = async (
 
     const currents: ObjectTypes[] = freeGames?.filter(
       (game: ObjectTypes) =>
-        game?.price?.lineOffers[0]?.appliedRules?.length !== 0
+        game?.price?.lineOffers[0]?.appliedRules?.length !== 0 || Date.parse(game?.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.startDate) < Date.now()
     );
 
     const nexts: ObjectTypes[] = freeGames.filter(
