@@ -41,7 +41,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getGames = void 0;
 var axios_1 = __importDefault(require("axios"));
-var countryCodes = ["TR", "US", "GB", "DE", "AR", "ES", "MX", "FR", "IT", "JP", "KR", "PL", "BR", "RU", "TH", "CN"];
+var countryCodes = [
+    "TR",
+    "US",
+    "GB",
+    "DE",
+    "AR",
+    "ES",
+    "MX",
+    "FR",
+    "IT",
+    "JP",
+    "KR",
+    "PL",
+    "BR",
+    "RU",
+    "TH",
+    "CN",
+];
 /**
  * @author Aykut Saki <aykutsakisocial@gmail.com>
  * @async
@@ -66,9 +83,21 @@ var getGames = function (country) {
                     data = (_e.sent()).data;
                     if (data === null || data === void 0 ? void 0 : data.errors)
                         throw new TypeError("Invalid country code country codes:\n" + countryCodes + "\nDefault US");
-                    freeGames = (_d = (_c = (_b = (_a = data === null || data === void 0 ? void 0 : data.data) === null || _a === void 0 ? void 0 : _a.Catalog) === null || _b === void 0 ? void 0 : _b.searchStore) === null || _c === void 0 ? void 0 : _c.elements) === null || _d === void 0 ? void 0 : _d.filter(function (game) { return game.offerType === "BASE_GAME"; });
-                    currents = freeGames === null || freeGames === void 0 ? void 0 : freeGames.filter(function (game) { var _a, _b, _c, _d, _e, _f; return ((_c = (_b = (_a = game === null || game === void 0 ? void 0 : game.price) === null || _a === void 0 ? void 0 : _a.lineOffers[0]) === null || _b === void 0 ? void 0 : _b.appliedRules) === null || _c === void 0 ? void 0 : _c.length) !== 0 || Date.parse((_f = (_e = (_d = game === null || game === void 0 ? void 0 : game.promotions) === null || _d === void 0 ? void 0 : _d.promotionalOffers[0]) === null || _e === void 0 ? void 0 : _e.promotionalOffers[0]) === null || _f === void 0 ? void 0 : _f.startDate) < Date.now(); });
-                    nexts = freeGames.filter(function (game) { var _a, _b; return ((_b = (_a = game === null || game === void 0 ? void 0 : game.promotions) === null || _a === void 0 ? void 0 : _a.upcomingPromotionalOffers) === null || _b === void 0 ? void 0 : _b.length) !== 0 && (game === null || game === void 0 ? void 0 : game.promotions) !== null; });
+                    freeGames = (_d = (_c = (_b = (_a = data === null || data === void 0 ? void 0 : data.data) === null || _a === void 0 ? void 0 : _a.Catalog) === null || _b === void 0 ? void 0 : _b.searchStore) === null || _c === void 0 ? void 0 : _c.elements) === null || _d === void 0 ? void 0 : _d.filter(function (game) {
+                        return game.offerType === "BASE_GAME" ||
+                            game.promotions.promotionalOffers.length !== 0 ||
+                            game.promotions.upcomingPromotionalOffers.length !== 0;
+                    });
+                    currents = freeGames === null || freeGames === void 0 ? void 0 : freeGames.filter(function (game) {
+                        var _a, _b, _c, _d, _e, _f;
+                        return ((_c = (_b = (_a = game === null || game === void 0 ? void 0 : game.price) === null || _a === void 0 ? void 0 : _a.lineOffers[0]) === null || _b === void 0 ? void 0 : _b.appliedRules) === null || _c === void 0 ? void 0 : _c.length) !== 0 ||
+                            Date.parse((_f = (_e = (_d = game === null || game === void 0 ? void 0 : game.promotions) === null || _d === void 0 ? void 0 : _d.promotionalOffers[0]) === null || _e === void 0 ? void 0 : _e.promotionalOffers[0]) === null || _f === void 0 ? void 0 : _f.startDate) < Date.now();
+                    });
+                    nexts = freeGames.filter(function (game) {
+                        var _a, _b;
+                        return ((_b = (_a = game === null || game === void 0 ? void 0 : game.promotions) === null || _a === void 0 ? void 0 : _a.upcomingPromotionalOffers) === null || _b === void 0 ? void 0 : _b.length) !== 0 &&
+                            (game === null || game === void 0 ? void 0 : game.promotions) !== null;
+                    });
                     return [2 /*return*/, { currents: currents, nexts: nexts }];
                 case 2:
                     error_1 = _e.sent();

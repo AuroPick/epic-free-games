@@ -1,4 +1,4 @@
-interface ObjectTypes {
+export interface ObjectType {
     title: string;
     id: string;
     namespace: string;
@@ -67,11 +67,11 @@ interface ObjectTypes {
         upcomingPromotionalOffers: [];
     };
 }
-interface ResultType {
-    currents: ObjectTypes[];
-    nexts: ObjectTypes[];
+export interface ResultType {
+    currents: ObjectType[];
+    nexts: ObjectType[];
 }
-declare type CountryType = "TR" | "US" | "GB" | "DE" | "AR" | "ES" | "MX" | "FR" | "IT" | "JP" | "KR" | "PL" | "BR" | "RU" | "TH" | "CN";
+export declare type CountryType = "TR" | "US" | "GB" | "DE" | "AR" | "ES" | "MX" | "FR" | "IT" | "JP" | "KR" | "PL" | "BR" | "RU" | "TH" | "CN";
 /**
  * @author Aykut Saki <aykutsakisocial@gmail.com>
  * @async
@@ -81,5 +81,4 @@ declare type CountryType = "TR" | "US" | "GB" | "DE" | "AR" | "ES" | "MX" | "FR"
  * @returns currents: games that are currently free. nexts: announced games that will be free.
  */
 export declare const getGames: (country?: CountryType) => Promise<ResultType>;
-export {};
 //# sourceMappingURL=index.d.ts.map

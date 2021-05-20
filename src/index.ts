@@ -1,6 +1,6 @@
 import axios from "axios";
 
-interface ObjectTypes {
+export interface ObjectType {
   title: string;
   id: string;
   namespace: string;
@@ -68,12 +68,12 @@ interface ObjectTypes {
   };
 }
 
-interface ResultType {
-  currents: ObjectTypes[];
-  nexts: ObjectTypes[];
+export interface ResultType {
+  currents: ObjectType[];
+  nexts: ObjectType[];
 }
 
-type CountryType =
+export type CountryType =
   | "TR"
   | "US"
   | "GB"
@@ -91,7 +91,24 @@ type CountryType =
   | "TH"
   | "CN";
 
-const countryCodes = ["TR", "US", "GB", "DE", "AR", "ES", "MX", "FR", "IT", "JP", "KR", "PL", "BR", "RU", "TH", "CN"];
+const countryCodes = [
+  "TR",
+  "US",
+  "GB",
+  "DE",
+  "AR",
+  "ES",
+  "MX",
+  "FR",
+  "IT",
+  "JP",
+  "KR",
+  "PL",
+  "BR",
+  "RU",
+  "TH",
+  "CN",
+];
 
 /**
  * @author Aykut Saki <aykutsakisocial@gmail.com>
@@ -113,20 +130,32 @@ export const getGames = async (
       `https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?country=${country}`
     );
 
-    if (data?.errors) throw new TypeError(`Invalid country code country codes:\n${countryCodes}\nDefault US`);
+    if (data?.errors)
+      throw new TypeError(
+        `Invalid country code country codes:\n${countryCodes}\nDefault US`
+      );
 
-    const freeGames: ObjectTypes[] = data?.data?.Catalog?.searchStore?.elements?.filter(
-      (game: { offerType: string }) => game.offerType === "BASE_GAME"
+    const freeGames: ObjectType[] =
+      data?.data?.Catalog?.searchStore?.elements?.filter(
+        (game: ObjectType) =>
+          game.offerType === "BASE_GAME" ||
+          game.promotions.promotionalOffers.length !== 0 ||
+          game.promotions.upcomingPromotionalOffers.length !== 0
+      );
+
+    const currents: ObjectType[] = freeGames?.filter(
+      (game: ObjectType) =>
+        game?.price?.lineOffers[0]?.appliedRules?.length !== 0 ||
+        Date.parse(
+          game?.promotions?.promotionalOffers[0]?.promotionalOffers[0]
+            ?.startDate
+        ) < Date.now()
     );
 
-    const currents: ObjectTypes[] = freeGames?.filter(
-      (game: ObjectTypes) =>
-        game?.price?.lineOffers[0]?.appliedRules?.length !== 0 || Date.parse(game?.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.startDate) < Date.now()
-    );
-
-    const nexts: ObjectTypes[] = freeGames.filter(
-      (game: ObjectTypes) =>
-        game?.promotions?.upcomingPromotionalOffers?.length !== 0 && game?.promotions !== null
+    const nexts: ObjectType[] = freeGames.filter(
+      (game: ObjectType) =>
+        game?.promotions?.upcomingPromotionalOffers?.length !== 0 &&
+        game?.promotions !== null
     );
 
     return { currents, nexts };
