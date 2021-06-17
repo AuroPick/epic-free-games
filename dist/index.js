@@ -84,9 +84,10 @@ var getGames = function (country) {
                     if (data === null || data === void 0 ? void 0 : data.errors)
                         throw new TypeError("Invalid country code country codes:\n" + countryCodes + "\nDefault US");
                     freeGames = (_d = (_c = (_b = (_a = data === null || data === void 0 ? void 0 : data.data) === null || _a === void 0 ? void 0 : _a.Catalog) === null || _b === void 0 ? void 0 : _b.searchStore) === null || _c === void 0 ? void 0 : _c.elements) === null || _d === void 0 ? void 0 : _d.filter(function (game) {
-                        return game.offerType === "BASE_GAME" ||
-                            game.promotions.promotionalOffers.length !== 0 ||
-                            game.promotions.upcomingPromotionalOffers.length !== 0;
+                        var _a, _b, _c, _d;
+                        return (game === null || game === void 0 ? void 0 : game.offerType) === "BASE_GAME" ||
+                            ((_b = (_a = game === null || game === void 0 ? void 0 : game.promotions) === null || _a === void 0 ? void 0 : _a.promotionalOffers) === null || _b === void 0 ? void 0 : _b.length) !== 0 ||
+                            ((_d = (_c = game === null || game === void 0 ? void 0 : game.promotions) === null || _c === void 0 ? void 0 : _c.upcomingPromotionalOffers) === null || _d === void 0 ? void 0 : _d.length) !== 0;
                     });
                     currents = freeGames === null || freeGames === void 0 ? void 0 : freeGames.filter(function (game) {
                         var _a, _b, _c, _d, _e, _f;

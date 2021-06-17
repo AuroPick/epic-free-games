@@ -138,9 +138,9 @@ export const getGames = async (
     const freeGames: ObjectType[] =
       data?.data?.Catalog?.searchStore?.elements?.filter(
         (game: ObjectType) =>
-          game.offerType === "BASE_GAME" ||
-          game.promotions.promotionalOffers.length !== 0 ||
-          game.promotions.upcomingPromotionalOffers.length !== 0
+          game?.offerType === "BASE_GAME" ||
+          game?.promotions?.promotionalOffers?.length !== 0 ||
+          game?.promotions?.upcomingPromotionalOffers?.length !== 0
       );
 
     const currents: ObjectType[] = freeGames?.filter(
