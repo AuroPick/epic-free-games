@@ -132,15 +132,17 @@ export const getGames = async (
 
     if (data?.errors)
       throw new TypeError(
-        `Invalid country code country codes:\n${countryCodes}\nDefault US`
+        `An error occurred
+        error: ${data.errors[0]?.serviceResponse}
+        `
       );
 
     const freeGames: ObjectType[] =
       data?.data?.Catalog?.searchStore?.elements?.filter(
         (game: ObjectType) =>
-          game?.offerType === "BASE_GAME" ||
+          (game?.offerType === "BASE_GAME" ||
           game?.promotions?.promotionalOffers?.length !== 0 ||
-          game?.promotions?.upcomingPromotionalOffers?.length !== 0
+          game?.promotions?.upcomingPromotionalOffers?.length !== 0) && game?.price?.totalPrice?.discountPrice === 0
       );
 
     const currents: ObjectType[] = freeGames?.filter(
@@ -160,6 +162,6 @@ export const getGames = async (
 
     return { currents, nexts };
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error as string);
   }
 };

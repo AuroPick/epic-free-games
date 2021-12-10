@@ -71,23 +71,23 @@ var getGames = function (country) {
     if (country === void 0) { country = "US"; }
     return __awaiter(void 0, void 0, void 0, function () {
         var data, freeGames, currents, nexts, error_1;
-        var _a, _b, _c, _d;
-        return __generator(this, function (_e) {
-            switch (_e.label) {
+        var _a, _b, _c, _d, _e;
+        return __generator(this, function (_f) {
+            switch (_f.label) {
                 case 0:
-                    _e.trys.push([0, 2, , 3]);
+                    _f.trys.push([0, 2, , 3]);
                     if (country.toUpperCase() !== country)
                         throw new TypeError("Country code must be uppercase your code: " + country);
                     return [4 /*yield*/, axios_1.default.get("https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?country=" + country)];
                 case 1:
-                    data = (_e.sent()).data;
+                    data = (_f.sent()).data;
                     if (data === null || data === void 0 ? void 0 : data.errors)
-                        throw new TypeError("Invalid country code country codes:\n" + countryCodes + "\nDefault US");
-                    freeGames = (_d = (_c = (_b = (_a = data === null || data === void 0 ? void 0 : data.data) === null || _a === void 0 ? void 0 : _a.Catalog) === null || _b === void 0 ? void 0 : _b.searchStore) === null || _c === void 0 ? void 0 : _c.elements) === null || _d === void 0 ? void 0 : _d.filter(function (game) {
-                        var _a, _b, _c, _d;
-                        return (game === null || game === void 0 ? void 0 : game.offerType) === "BASE_GAME" ||
+                        throw new TypeError("An error occurred\n        error: " + ((_a = data.errors[0]) === null || _a === void 0 ? void 0 : _a.serviceResponse) + "\n        ");
+                    freeGames = (_e = (_d = (_c = (_b = data === null || data === void 0 ? void 0 : data.data) === null || _b === void 0 ? void 0 : _b.Catalog) === null || _c === void 0 ? void 0 : _c.searchStore) === null || _d === void 0 ? void 0 : _d.elements) === null || _e === void 0 ? void 0 : _e.filter(function (game) {
+                        var _a, _b, _c, _d, _e, _f;
+                        return ((game === null || game === void 0 ? void 0 : game.offerType) === "BASE_GAME" ||
                             ((_b = (_a = game === null || game === void 0 ? void 0 : game.promotions) === null || _a === void 0 ? void 0 : _a.promotionalOffers) === null || _b === void 0 ? void 0 : _b.length) !== 0 ||
-                            ((_d = (_c = game === null || game === void 0 ? void 0 : game.promotions) === null || _c === void 0 ? void 0 : _c.upcomingPromotionalOffers) === null || _d === void 0 ? void 0 : _d.length) !== 0;
+                            ((_d = (_c = game === null || game === void 0 ? void 0 : game.promotions) === null || _c === void 0 ? void 0 : _c.upcomingPromotionalOffers) === null || _d === void 0 ? void 0 : _d.length) !== 0) && ((_f = (_e = game === null || game === void 0 ? void 0 : game.price) === null || _e === void 0 ? void 0 : _e.totalPrice) === null || _f === void 0 ? void 0 : _f.discountPrice) === 0;
                     });
                     currents = freeGames === null || freeGames === void 0 ? void 0 : freeGames.filter(function (game) {
                         var _a, _b, _c, _d, _e, _f;
@@ -101,7 +101,7 @@ var getGames = function (country) {
                     });
                     return [2 /*return*/, { currents: currents, nexts: nexts }];
                 case 2:
-                    error_1 = _e.sent();
+                    error_1 = _f.sent();
                     throw new Error(error_1);
                 case 3: return [2 /*return*/];
             }
