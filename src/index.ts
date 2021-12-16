@@ -131,9 +131,11 @@ export const getGames = async (
     );
 
     if (data?.errors)
-      throw new TypeError(
+      throw new Error(
         `An error occurred
-        error: ${data.errors[0]?.serviceResponse}
+        error: ${data.errors.map((err: any) =>
+          JSON.stringify(err, Object.getOwnPropertyNames(err), "\t")
+        )}
         `
       );
 
@@ -141,8 +143,9 @@ export const getGames = async (
       data?.data?.Catalog?.searchStore?.elements?.filter(
         (game: ObjectType) =>
           (game?.offerType === "BASE_GAME" ||
-          game?.promotions?.promotionalOffers?.length !== 0 ||
-          game?.promotions?.upcomingPromotionalOffers?.length !== 0) && game?.price?.totalPrice?.discountPrice === 0
+            game?.promotions?.promotionalOffers?.length !== 0 ||
+            game?.promotions?.upcomingPromotionalOffers?.length !== 0) &&
+          game?.price?.totalPrice?.discountPrice === 0
       );
 
     const currents: ObjectType[] = freeGames?.filter(
