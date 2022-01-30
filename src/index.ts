@@ -1,6 +1,7 @@
 import axios from "axios";
+import moment from "moment";
 
-export interface ObjectType {
+export interface OfferGame {
   title: string;
   id: string;
   namespace: string;
@@ -64,16 +65,25 @@ export interface ObjectType {
         };
       }[];
     }[];
-    upcomingPromotionalOffers: [];
+    upcomingPromotionalOffers: {
+      promotionalOffers: {
+        startDate: string;
+        endDate: string;
+        discountSetting: {
+          discountType: string;
+          discountPercentage: number;
+        };
+      }[];
+    }[];
   };
 }
 
-export interface ResultType {
-  currents: ObjectType[];
-  nexts: ObjectType[];
+export interface Result {
+  currentGames: OfferGame[];
+  nextGames: OfferGame[];
 }
 
-export type CountryType =
+export type Country =
   | "TR"
   | "US"
   | "GB"
@@ -91,36 +101,15 @@ export type CountryType =
   | "TH"
   | "CN";
 
-const countryCodes = [
-  "TR",
-  "US",
-  "GB",
-  "DE",
-  "AR",
-  "ES",
-  "MX",
-  "FR",
-  "IT",
-  "JP",
-  "KR",
-  "PL",
-  "BR",
-  "RU",
-  "TH",
-  "CN",
-];
-
 /**
  * @author Aykut Saki <aykutsakisocial@gmail.com>
  * @async
  * @function
  * @name getGames
  * @param {string} country ISO country code
- * @returns currents: games that are currently free. nexts: announced games that will be free.
+ * @returns currentGames: games that are currently free. nextGames: announced games that will be free.
  */
-export const getGames = async (
-  country: CountryType = "US"
-): Promise<ResultType> => {
+export const getGames = async (country: Country = "US") => {
   try {
     if (country.toUpperCase() !== country)
       throw new TypeError(
@@ -139,31 +128,67 @@ export const getGames = async (
         `
       );
 
-    const freeGames: ObjectType[] =
-      data?.data?.Catalog?.searchStore?.elements?.filter(
-        (game: ObjectType) =>
-          (game?.offerType === "BASE_GAME" ||
-            game?.promotions?.promotionalOffers?.length !== 0 ||
-            game?.promotions?.upcomingPromotionalOffers?.length !== 0) &&
-          game?.price?.totalPrice?.discountPrice === 0
+    const { currentGames, nextGames }: Result =
+      data?.data?.Catalog?.searchStore?.elements?.reduce(
+        (acc: Result, curr: OfferGame) => {
+          const isBaseGame = curr.offerType === "BASE_GAME";
+
+          const hasPromotionalOffers =
+            curr.promotions?.promotionalOffers?.length !== 0;
+
+          const hasUpcomingPromotionalOffers =
+            curr.promotions?.upcomingPromotionalOffers?.length !== 0;
+
+          const isFree = curr.price?.totalPrice?.discountPrice === 0;
+
+          const inThisWeek =
+            moment() >
+              moment(
+                curr.promotions?.promotionalOffers[0]?.promotionalOffers[0]
+                  ?.startDate
+              ) &&
+            moment() <
+              moment(
+                curr.promotions?.promotionalOffers[0]?.promotionalOffers[0]
+                  ?.endDate
+              );
+
+          const inNextWeek =
+            moment().add("week") >
+              moment(
+                curr.promotions?.promotionalOffers[0]?.promotionalOffers[0]
+                  ?.startDate
+              ) &&
+            moment().add("week") <
+              moment(
+                curr.promotions?.promotionalOffers[0]?.promotionalOffers[0]
+                  ?.endDate
+              );
+
+          const willBeFree =
+            curr.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0]
+              ?.discountSetting?.discountPercentage === 0;
+
+          if (isBaseGame && hasPromotionalOffers && isFree && inThisWeek)
+            return { ...acc, currentGames: [...acc.currentGames, curr] };
+
+          if (
+            isBaseGame &&
+            hasUpcomingPromotionalOffers &&
+            willBeFree &&
+            inNextWeek
+          )
+            return { ...acc, nextGames: [...acc.nextGames, curr] };
+
+          return { ...acc };
+        },
+        {
+          currentGames: [],
+          nextGames: [],
+        } as Result
       );
 
-    const currents: ObjectType[] = freeGames?.filter(
-      (game: ObjectType) =>
-        game?.price?.lineOffers[0]?.appliedRules?.length !== 0 ||
-        Date.parse(
-          game?.promotions?.promotionalOffers[0]?.promotionalOffers[0]
-            ?.startDate
-        ) < Date.now()
-    );
-
-    const nexts: ObjectType[] = freeGames.filter(
-      (game: ObjectType) =>
-        game?.promotions?.upcomingPromotionalOffers?.length !== 0 &&
-        game?.promotions !== null
-    );
-
-    return { currents, nexts };
+    return { currentGames, nextGames };
   } catch (error) {
     throw new Error(error as string);
   }

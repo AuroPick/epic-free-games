@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,30 +46,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getGames = void 0;
 var axios_1 = __importDefault(require("axios"));
-var countryCodes = [
-    "TR",
-    "US",
-    "GB",
-    "DE",
-    "AR",
-    "ES",
-    "MX",
-    "FR",
-    "IT",
-    "JP",
-    "KR",
-    "PL",
-    "BR",
-    "RU",
-    "TH",
-    "CN",
-];
+var moment_1 = __importDefault(require("moment"));
 /**
  * @author Aykut Saki <aykutsakisocial@gmail.com>
  * @async
@@ -70,41 +69,51 @@ var countryCodes = [
 var getGames = function (country) {
     if (country === void 0) { country = "US"; }
     return __awaiter(void 0, void 0, void 0, function () {
-        var data, freeGames, currents, nexts, error_1;
-        var _a, _b, _c, _d;
-        return __generator(this, function (_e) {
-            switch (_e.label) {
+        var data, _a, currentGames, nextGames, error_1;
+        var _b, _c, _d, _e;
+        return __generator(this, function (_f) {
+            switch (_f.label) {
                 case 0:
-                    _e.trys.push([0, 2, , 3]);
+                    _f.trys.push([0, 2, , 3]);
                     if (country.toUpperCase() !== country)
                         throw new TypeError("Country code must be uppercase your code: " + country);
                     return [4 /*yield*/, axios_1.default.get("https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?country=" + country)];
                 case 1:
-                    data = (_e.sent()).data;
+                    data = (_f.sent()).data;
                     if (data === null || data === void 0 ? void 0 : data.errors)
                         throw new Error("An error occurred\n        error: " + data.errors.map(function (err) {
                             return JSON.stringify(err, Object.getOwnPropertyNames(err), "\t");
                         }) + "\n        ");
-                    freeGames = (_d = (_c = (_b = (_a = data === null || data === void 0 ? void 0 : data.data) === null || _a === void 0 ? void 0 : _a.Catalog) === null || _b === void 0 ? void 0 : _b.searchStore) === null || _c === void 0 ? void 0 : _c.elements) === null || _d === void 0 ? void 0 : _d.filter(function (game) {
-                        var _a, _b, _c, _d, _e, _f;
-                        return ((game === null || game === void 0 ? void 0 : game.offerType) === "BASE_GAME" ||
-                            ((_b = (_a = game === null || game === void 0 ? void 0 : game.promotions) === null || _a === void 0 ? void 0 : _a.promotionalOffers) === null || _b === void 0 ? void 0 : _b.length) !== 0 ||
-                            ((_d = (_c = game === null || game === void 0 ? void 0 : game.promotions) === null || _c === void 0 ? void 0 : _c.upcomingPromotionalOffers) === null || _d === void 0 ? void 0 : _d.length) !== 0) &&
-                            ((_f = (_e = game === null || game === void 0 ? void 0 : game.price) === null || _e === void 0 ? void 0 : _e.totalPrice) === null || _f === void 0 ? void 0 : _f.discountPrice) === 0;
-                    });
-                    currents = freeGames === null || freeGames === void 0 ? void 0 : freeGames.filter(function (game) {
-                        var _a, _b, _c, _d, _e, _f;
-                        return ((_c = (_b = (_a = game === null || game === void 0 ? void 0 : game.price) === null || _a === void 0 ? void 0 : _a.lineOffers[0]) === null || _b === void 0 ? void 0 : _b.appliedRules) === null || _c === void 0 ? void 0 : _c.length) !== 0 ||
-                            Date.parse((_f = (_e = (_d = game === null || game === void 0 ? void 0 : game.promotions) === null || _d === void 0 ? void 0 : _d.promotionalOffers[0]) === null || _e === void 0 ? void 0 : _e.promotionalOffers[0]) === null || _f === void 0 ? void 0 : _f.startDate) < Date.now();
-                    });
-                    nexts = freeGames.filter(function (game) {
-                        var _a, _b;
-                        return ((_b = (_a = game === null || game === void 0 ? void 0 : game.promotions) === null || _a === void 0 ? void 0 : _a.upcomingPromotionalOffers) === null || _b === void 0 ? void 0 : _b.length) !== 0 &&
-                            (game === null || game === void 0 ? void 0 : game.promotions) !== null;
-                    });
-                    return [2 /*return*/, { currents: currents, nexts: nexts }];
+                    _a = (_e = (_d = (_c = (_b = data === null || data === void 0 ? void 0 : data.data) === null || _b === void 0 ? void 0 : _b.Catalog) === null || _c === void 0 ? void 0 : _c.searchStore) === null || _d === void 0 ? void 0 : _d.elements) === null || _e === void 0 ? void 0 : _e.reduce(function (acc, curr) {
+                        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x;
+                        var isBaseGame = curr.offerType === "BASE_GAME";
+                        var hasPromotionalOffers = ((_b = (_a = curr.promotions) === null || _a === void 0 ? void 0 : _a.promotionalOffers) === null || _b === void 0 ? void 0 : _b.length) !== 0;
+                        var hasUpcomingPromotionalOffers = ((_d = (_c = curr.promotions) === null || _c === void 0 ? void 0 : _c.upcomingPromotionalOffers) === null || _d === void 0 ? void 0 : _d.length) !== 0;
+                        var isFree = ((_f = (_e = curr.price) === null || _e === void 0 ? void 0 : _e.totalPrice) === null || _f === void 0 ? void 0 : _f.discountPrice) === 0;
+                        var inThisWeek = moment_1.default() >
+                            moment_1.default((_j = (_h = (_g = curr.promotions) === null || _g === void 0 ? void 0 : _g.promotionalOffers[0]) === null || _h === void 0 ? void 0 : _h.promotionalOffers[0]) === null || _j === void 0 ? void 0 : _j.startDate) &&
+                            moment_1.default() <
+                                moment_1.default((_m = (_l = (_k = curr.promotions) === null || _k === void 0 ? void 0 : _k.promotionalOffers[0]) === null || _l === void 0 ? void 0 : _l.promotionalOffers[0]) === null || _m === void 0 ? void 0 : _m.endDate);
+                        var inNextWeek = moment_1.default().add("week") >
+                            moment_1.default((_q = (_p = (_o = curr.promotions) === null || _o === void 0 ? void 0 : _o.promotionalOffers[0]) === null || _p === void 0 ? void 0 : _p.promotionalOffers[0]) === null || _q === void 0 ? void 0 : _q.startDate) &&
+                            moment_1.default().add("week") <
+                                moment_1.default((_t = (_s = (_r = curr.promotions) === null || _r === void 0 ? void 0 : _r.promotionalOffers[0]) === null || _s === void 0 ? void 0 : _s.promotionalOffers[0]) === null || _t === void 0 ? void 0 : _t.endDate);
+                        var willBeFree = ((_x = (_w = (_v = (_u = curr.promotions) === null || _u === void 0 ? void 0 : _u.upcomingPromotionalOffers[0]) === null || _v === void 0 ? void 0 : _v.promotionalOffers[0]) === null || _w === void 0 ? void 0 : _w.discountSetting) === null || _x === void 0 ? void 0 : _x.discountPercentage) === 0;
+                        if (isBaseGame && hasPromotionalOffers && isFree && inThisWeek)
+                            return __assign(__assign({}, acc), { currentGames: __spreadArray(__spreadArray([], acc.currentGames), [curr]) });
+                        if (isBaseGame &&
+                            hasUpcomingPromotionalOffers &&
+                            willBeFree &&
+                            inNextWeek)
+                            return __assign(__assign({}, acc), { nextGames: __spreadArray(__spreadArray([], acc.nextGames), [curr]) });
+                        return __assign({}, acc);
+                    }, {
+                        currentGames: [],
+                        nextGames: [],
+                    }), currentGames = _a.currentGames, nextGames = _a.nextGames;
+                    return [2 /*return*/, { currentGames: currentGames, nextGames: nextGames }];
                 case 2:
-                    error_1 = _e.sent();
+                    error_1 = _f.sent();
                     throw new Error(error_1);
                 case 3: return [2 /*return*/];
             }
