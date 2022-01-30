@@ -47,7 +47,7 @@ getGames("US").then(res => {
 
 ```js
 {
-  currents: [
+  currentGames: [
     {
       title: '3 out of 10: Season Two',
       id: '9fc33e99abf342138323856854e745ec',
@@ -71,7 +71,7 @@ getGames("US").then(res => {
       promotions: [Object]
     }
   ],
-  nexts: [
+  nextGames: [
     {
       title: "Ken Follett's The Pillars of the Earth",
       id: 'ded5930173d5495993186871fbfd329a',
