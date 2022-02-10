@@ -154,15 +154,15 @@ export const getGames = async (country: Country = "US") => {
               );
 
           const inNextWeek =
-            moment().add("week") >
+            moment().add(1, "week") >
               moment(
-                curr.promotions?.promotionalOffers[0]?.promotionalOffers[0]
-                  ?.startDate
+                curr.promotions?.upcomingPromotionalOffers[0]
+                  ?.promotionalOffers[0]?.startDate
               ) &&
-            moment().add("week") <
+            moment().add(1, "week") <
               moment(
-                curr.promotions?.promotionalOffers[0]?.promotionalOffers[0]
-                  ?.endDate
+                curr.promotions?.upcomingPromotionalOffers[0]
+                  ?.promotionalOffers[0]?.endDate
               );
 
           const willBeFree =

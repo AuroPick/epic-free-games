@@ -64,7 +64,7 @@ var moment_1 = __importDefault(require("moment"));
  * @function
  * @name getGames
  * @param {string} country ISO country code
- * @returns currents: games that are currently free. nexts: announced games that will be free.
+ * @returns currentGames: games that are currently free. nextGames: announced games that will be free.
  */
 var getGames = function (country) {
     if (country === void 0) { country = "US"; }
@@ -94,10 +94,10 @@ var getGames = function (country) {
                             moment_1.default((_j = (_h = (_g = curr.promotions) === null || _g === void 0 ? void 0 : _g.promotionalOffers[0]) === null || _h === void 0 ? void 0 : _h.promotionalOffers[0]) === null || _j === void 0 ? void 0 : _j.startDate) &&
                             moment_1.default() <
                                 moment_1.default((_m = (_l = (_k = curr.promotions) === null || _k === void 0 ? void 0 : _k.promotionalOffers[0]) === null || _l === void 0 ? void 0 : _l.promotionalOffers[0]) === null || _m === void 0 ? void 0 : _m.endDate);
-                        var inNextWeek = moment_1.default().add("week") >
-                            moment_1.default((_q = (_p = (_o = curr.promotions) === null || _o === void 0 ? void 0 : _o.promotionalOffers[0]) === null || _p === void 0 ? void 0 : _p.promotionalOffers[0]) === null || _q === void 0 ? void 0 : _q.startDate) &&
-                            moment_1.default().add("week") <
-                                moment_1.default((_t = (_s = (_r = curr.promotions) === null || _r === void 0 ? void 0 : _r.promotionalOffers[0]) === null || _s === void 0 ? void 0 : _s.promotionalOffers[0]) === null || _t === void 0 ? void 0 : _t.endDate);
+                        var inNextWeek = moment_1.default().add(1, "week") >
+                            moment_1.default((_q = (_p = (_o = curr.promotions) === null || _o === void 0 ? void 0 : _o.upcomingPromotionalOffers[0]) === null || _p === void 0 ? void 0 : _p.promotionalOffers[0]) === null || _q === void 0 ? void 0 : _q.startDate) &&
+                            moment_1.default().add(1, "week") <
+                                moment_1.default((_t = (_s = (_r = curr.promotions) === null || _r === void 0 ? void 0 : _r.upcomingPromotionalOffers[0]) === null || _s === void 0 ? void 0 : _s.promotionalOffers[0]) === null || _t === void 0 ? void 0 : _t.endDate);
                         var willBeFree = ((_x = (_w = (_v = (_u = curr.promotions) === null || _u === void 0 ? void 0 : _u.upcomingPromotionalOffers[0]) === null || _v === void 0 ? void 0 : _v.promotionalOffers[0]) === null || _w === void 0 ? void 0 : _w.discountSetting) === null || _x === void 0 ? void 0 : _x.discountPercentage) === 0;
                         if (isBaseGame && hasPromotionalOffers && isFree && inThisWeek)
                             return __assign(__assign({}, acc), { currentGames: __spreadArray(__spreadArray([], acc.currentGames), [curr]) });
