@@ -64,7 +64,7 @@ var moment_1 = __importDefault(require("moment"));
  * @function
  * @name getGames
  * @param {string} country ISO country code
- * @param {string} includeAll include all offers like DLC's
+ * @param {boolean} includeAll include all offers like DLC's
  * @returns currentGames: games that are currently free. nextGames: announced games that will be free.
  */
 var getGames = function (country, includeAll) {

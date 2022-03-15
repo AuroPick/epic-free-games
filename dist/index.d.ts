@@ -87,7 +87,7 @@ export declare type Country = "TR" | "US" | "GB" | "DE" | "AR" | "ES" | "MX" | "
  * @function
  * @name getGames
  * @param {string} country ISO country code
- * @param {string} includeAll include all offers like DLC's
+ * @param {boolean} includeAll include all offers like DLC's
  * @returns currentGames: games that are currently free. nextGames: announced games that will be free.
  */
 export declare const getGames: (country?: Country, includeAll?: boolean) => Promise<{
