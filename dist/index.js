@@ -64,10 +64,12 @@ var moment_1 = __importDefault(require("moment"));
  * @function
  * @name getGames
  * @param {string} country ISO country code
+ * @param {string} includeAll include all offers like DLC's
  * @returns currentGames: games that are currently free. nextGames: announced games that will be free.
  */
-var getGames = function (country) {
+var getGames = function (country, includeAll) {
     if (country === void 0) { country = "US"; }
+    if (includeAll === void 0) { includeAll = false; }
     return __awaiter(void 0, void 0, void 0, function () {
         var data, _a, currentGames, nextGames, error_1;
         var _b, _c, _d, _e;
@@ -86,7 +88,7 @@ var getGames = function (country) {
                         }) + "\n        ");
                     _a = (_e = (_d = (_c = (_b = data === null || data === void 0 ? void 0 : data.data) === null || _b === void 0 ? void 0 : _b.Catalog) === null || _c === void 0 ? void 0 : _c.searchStore) === null || _d === void 0 ? void 0 : _d.elements) === null || _e === void 0 ? void 0 : _e.reduce(function (acc, curr) {
                         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x;
-                        var isBaseGame = curr.offerType === "BASE_GAME";
+                        var isBaseGame = includeAll ? true : curr.offerType === "BASE_GAME";
                         var hasPromotionalOffers = ((_b = (_a = curr.promotions) === null || _a === void 0 ? void 0 : _a.promotionalOffers) === null || _b === void 0 ? void 0 : _b.length) !== 0;
                         var hasUpcomingPromotionalOffers = ((_d = (_c = curr.promotions) === null || _c === void 0 ? void 0 : _c.upcomingPromotionalOffers) === null || _d === void 0 ? void 0 : _d.length) !== 0;
                         var isFree = ((_f = (_e = curr.price) === null || _e === void 0 ? void 0 : _e.totalPrice) === null || _f === void 0 ? void 0 : _f.discountPrice) === 0;

@@ -107,9 +107,10 @@ export type Country =
  * @function
  * @name getGames
  * @param {string} country ISO country code
+ * @param {string} includeAll include all offers like DLC's
  * @returns currentGames: games that are currently free. nextGames: announced games that will be free.
  */
-export const getGames = async (country: Country = "US") => {
+export const getGames = async (country: Country = "US", includeAll: boolean = false) => {
   try {
     if (country.toUpperCase() !== country)
       throw new TypeError(
@@ -131,7 +132,7 @@ export const getGames = async (country: Country = "US") => {
     const { currentGames, nextGames }: Result =
       data?.data?.Catalog?.searchStore?.elements?.reduce(
         (acc: Result, curr: OfferGame) => {
-          const isBaseGame = curr.offerType === "BASE_GAME";
+          const isBaseGame = includeAll ? true : curr.offerType === "BASE_GAME";
 
           const hasPromotionalOffers =
             curr.promotions?.promotionalOffers?.length !== 0;
