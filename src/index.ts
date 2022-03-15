@@ -107,7 +107,7 @@ export type Country =
  * @function
  * @name getGames
  * @param {string} country ISO country code
- * @param {string} includeAll include all offers like DLC's
+ * @param {boolean} includeAll include all offers like DLC's
  * @returns currentGames: games that are currently free. nextGames: announced games that will be free.
  */
 export const getGames = async (country: Country = "US", includeAll: boolean = false) => {
