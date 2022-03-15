@@ -29,7 +29,7 @@ import { getGames } from "epic-free-games";
 
 
 
-getGames("US").then(res => {
+getGames("JP", true).then(res => {
   // Do something
 }).catch(err => {
   // Do something
@@ -39,9 +39,10 @@ getGames("US").then(res => {
 
 ## Function Parameters
 
-| Function    | Parameter           | Parameter Values                                                                               | Default Value  |
-| :---------: | :-----------------: | :--------------------------------------------------------------------------------------------: | :------------: |
-| getGames    | country: string     | "TR", "US", "GB", "DE", "AR", "ES", "MX", "FR", "IT", "JP", "KR", "PL", "BR", "RU", "TH", "CN" | "US"           |
+| Function    | Parameter             | Parameter Values                                                                               | Default Value  |
+| :---------: | :-------------------: | :--------------------------------------------------------------------------------------------: | :------------: |
+| getGames    | country: `string`     | "TR", "US", "GB", "DE", "AR", "ES", "MX", "FR", "IT", "JP", "KR", "PL", "BR", "RU", "TH", "CN" | "US"           |
+| getGames    | includeAll: `boolean` | true \| false                                                                                  | false          |
 
 ## Sample Output
 
