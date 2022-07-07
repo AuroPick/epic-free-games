@@ -5,7 +5,7 @@
   <a href="https://www.npmjs.com/package/epic-free-games"><img alt="npm" src="https://img.shields.io/npm/dm/epic-free-games"></a>
   </br>
   </br>
-	<p><b>Get Weekly Epic Games Free Games</b></p>
+	<p><b>Get Weekly Free Games Of Epic Games</b></p>
 </div>
 
 ## Installation
