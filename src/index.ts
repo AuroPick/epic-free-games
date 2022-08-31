@@ -99,7 +99,8 @@ export type Country =
   | "BR"
   | "RU"
   | "TH"
-  | "CN";
+  | "CN"
+  | "IN";
 
 /**
  * @author Aykut Saki <aykutsakisocial@gmail.com>
