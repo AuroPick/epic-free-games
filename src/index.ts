@@ -99,6 +99,8 @@ export type Country =
   | "BR"
   | "RU"
   | "TH"
+  | "IN"
+  | "GR"
   | "CN";
 
 /**
