@@ -119,7 +119,7 @@ export const getGames = async (country: Country = "US", includeAll: boolean = fa
         `Country code must be uppercase your code: ${country}`
       );
     const { data } = await axios.get(
-      `https://cors-anywhere.herokuapp.com/https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?country=${country}`
+      `https://proxy.cors.sh/https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?country=${country}`
     );
 
     if (data?.errors)
