@@ -5,7 +5,7 @@
   <a href="https://www.npmjs.com/package/epic-free-games"><img alt="npm" src="https://img.shields.io/npm/dm/epic-free-games"></a>
   </br>
   </br>
-	<p><b>Get Weekly Free Games Of Epic Games</b></p>
+	<p><b>Get Weekly Epic Games Free Games</b></p>
 </div>
 
 ## Installation
@@ -21,28 +21,27 @@ yarn add epic-free-games
 ## Usage
 
 ```js
-const { getGames } = require("epic-free-games");
+const { getGames } = require('epic-free-games')
 
 // OR
 
-import { getGames } from "epic-free-games";
+import { getGames } from 'epic-free-games'
 
-
-
-getGames("JP", true).then(res => {
-  // Do something
-}).catch(err => {
-  // Do something
-});
-
+getGames('JP', true)
+  .then((res) => {
+    // Do something
+  })
+  .catch((err) => {
+    // Do something
+  })
 ```
 
 ## Function Parameters
 
-| Function    | Parameter             | Parameter Values                                                                               | Default Value  |
-| :---------: | :-------------------: | :--------------------------------------------------------------------------------------------: | :------------: |
-| getGames    | country: `string`     | "TR", "US", "GB", "DE", "AR", "ES", "MX", "FR", "IT", "JP", "KR", "PL", "BR", "RU", "TH", "CN", "IN", "GR | "US"           |
-| getGames    | includeAll: `boolean` | true \| false                                                                                  | false          |
+| Function |       Parameter       |                                             Parameter Values                                              | Default Value |
+| :------: | :-------------------: | :-------------------------------------------------------------------------------------------------------: | :-----------: |
+| getGames |   country: `string`   | "TR", "US", "GB", "DE", "AR", "ES", "MX", "FR", "IT", "JP", "KR", "PL", "BR", "RU", "TH", "CN", "IN", "GR |     "US"      |
+| getGames | includeAll: `boolean` |                                               true \| false                                               |     false     |
 
 ## Sample Output
 
@@ -142,6 +141,7 @@ getGames("JP", true).then(res => {
   ]
 }
 ```
+
 <hr/>
 
 > If you have any questions please do not hesitate to contact me.
