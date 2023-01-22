@@ -118,9 +118,7 @@ export const getGames = async (country: Country = "US", includeAll: boolean = fa
       throw new TypeError(
         `Country code must be uppercase your code: ${country}`
       );
-    const { data } = await axios.get(
-      `https://proxy.cors.sh/https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?country=${country}`
-    );
+    const { data } = await axios.get(`https://corsproxy.io/?https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?country=${country}`);
 
     if (data?.errors)
       throw new Error(

@@ -79,7 +79,7 @@ var getGames = function (country, includeAll) {
                     _f.trys.push([0, 2, , 3]);
                     if (country.toUpperCase() !== country)
                         throw new TypeError("Country code must be uppercase your code: " + country);
-                    return [4 /*yield*/, axios_1.default.get("https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?country=" + country)];
+                    return [4 /*yield*/, axios_1.default.get("https://corsproxy.io/?https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?country=" + country)];
                 case 1:
                     data = (_f.sent()).data;
                     if (data === null || data === void 0 ? void 0 : data.errors)

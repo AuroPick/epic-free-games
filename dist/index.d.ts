@@ -80,7 +80,7 @@ export interface Result {
     currentGames: OfferGame[];
     nextGames: OfferGame[];
 }
-export declare type Country = "TR" | "US" | "GB" | "DE" | "AR" | "ES" | "MX" | "FR" | "IT" | "JP" | "KR" | "PL" | "BR" | "RU" | "TH" | "CN";
+export declare type Country = "TR" | "US" | "GB" | "DE" | "AR" | "ES" | "MX" | "FR" | "IT" | "JP" | "KR" | "PL" | "BR" | "RU" | "TH" | "IN" | "GR" | "CN";
 /**
  * @author Aykut Saki <aykutsakisocial@gmail.com>
  * @async
