@@ -1,178 +1,181 @@
-import axios from 'axios'
-import moment from 'moment'
+export * from './core'
+export * from './modules'
 
-export interface OfferGame {
-  title: string
-  id: string
-  namespace: string
-  description: string
-  effectiveDate: string
-  offerType: string
-  expiryDate: boolean
-  status: string
-  isCodeRedemptionOnly: boolean
-  keyImages: {
-    type: string
-    url: string
-  }[]
-  seller: {
-    id: string
-    name: string
-  }
-  productSlug: string
-  urlSlug: string
-  url: boolean
-  items: {
-    id: string
-    namespace: string
-  }[]
-  customAttributes: {
-    key: string
-    value: string
-  }[]
-  categories: {
-    path: string
-  }[]
-  tags: {
-    id: string
-  }[]
-  price: {
-    totalPrice: {
-      discountPrice: number
-      originalPrice: number
-      voucherDiscount: number
-      discount: number
-      currencyCode: string
-      currencyInfo: {
-        decimals: number
-      }
-      fmtPrice: {
-        originalPrice: string
-        discountPrice: string
-        intermediatePrice: string
-      }
-    }
-    lineOffers: { appliedRules: [] }[]
-  }
-  promotions: {
-    promotionalOffers: {
-      promotionalOffers: {
-        startDate: string
-        endDate: string
-        discountSetting: {
-          discountType: string
-          discountPercentage: number
-        }
-      }[]
-    }[]
-    upcomingPromotionalOffers: {
-      promotionalOffers: {
-        startDate: string
-        endDate: string
-        discountSetting: {
-          discountType: string
-          discountPercentage: number
-        }
-      }[]
-    }[]
-  }
-}
+// import axios from 'axios'
+// import moment from 'moment'
 
-export interface Result {
-  currentGames: OfferGame[]
-  nextGames: OfferGame[]
-}
+// export interface OfferGame {
+//   title: string
+//   id: string
+//   namespace: string
+//   description: string
+//   effectiveDate: string
+//   offerType: string
+//   expiryDate: boolean
+//   status: string
+//   isCodeRedemptionOnly: boolean
+//   keyImages: {
+//     type: string
+//     url: string
+//   }[]
+//   seller: {
+//     id: string
+//     name: string
+//   }
+//   productSlug: string
+//   urlSlug: string
+//   url: boolean
+//   items: {
+//     id: string
+//     namespace: string
+//   }[]
+//   customAttributes: {
+//     key: string
+//     value: string
+//   }[]
+//   categories: {
+//     path: string
+//   }[]
+//   tags: {
+//     id: string
+//   }[]
+//   price: {
+//     totalPrice: {
+//       discountPrice: number
+//       originalPrice: number
+//       voucherDiscount: number
+//       discount: number
+//       currencyCode: string
+//       currencyInfo: {
+//         decimals: number
+//       }
+//       fmtPrice: {
+//         originalPrice: string
+//         discountPrice: string
+//         intermediatePrice: string
+//       }
+//     }
+//     lineOffers: { appliedRules: [] }[]
+//   }
+//   promotions: {
+//     promotionalOffers: {
+//       promotionalOffers: {
+//         startDate: string
+//         endDate: string
+//         discountSetting: {
+//           discountType: string
+//           discountPercentage: number
+//         }
+//       }[]
+//     }[]
+//     upcomingPromotionalOffers: {
+//       promotionalOffers: {
+//         startDate: string
+//         endDate: string
+//         discountSetting: {
+//           discountType: string
+//           discountPercentage: number
+//         }
+//       }[]
+//     }[]
+//   }
+// }
 
-export type Country =
-  | 'TR'
-  | 'US'
-  | 'GB'
-  | 'DE'
-  | 'AR'
-  | 'ES'
-  | 'MX'
-  | 'FR'
-  | 'IT'
-  | 'JP'
-  | 'KR'
-  | 'PL'
-  | 'BR'
-  | 'RU'
-  | 'TH'
-  | 'CN'
-  | 'IN'
-  | 'GR'
+// export interface Result {
+//   currentGames: OfferGame[]
+//   nextGames: OfferGame[]
+// }
 
-/**
- * @author Aykut Saki <aykutsakisocial@gmail.com>
- * @async
- * @function
- * @name getGames
- * @param {string} country ISO country code
- * @param {boolean} includeAll include all offers like DLC's
- * @returns currentGames: games that are currently free. nextGames: announced games that will be free.
- */
-export const getGames = async (country: Country = 'US', includeAll: boolean = false) => {
-  try {
-    if (country.toUpperCase() !== country)
-      throw new TypeError(`Country code must be uppercase your code: ${country}`)
-    const { data } = await axios.get(
-      `https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?country=${country}`
-    )
+// export type Country =
+//   | 'TR'
+//   | 'US'
+//   | 'GB'
+//   | 'DE'
+//   | 'AR'
+//   | 'ES'
+//   | 'MX'
+//   | 'FR'
+//   | 'IT'
+//   | 'JP'
+//   | 'KR'
+//   | 'PL'
+//   | 'BR'
+//   | 'RU'
+//   | 'TH'
+//   | 'CN'
+//   | 'IN'
+//   | 'GR'
 
-    if (data?.errors)
-      throw new Error(
-        `An error occurred
-        error: ${data.errors.map((err: any) =>
-          JSON.stringify(err, Object.getOwnPropertyNames(err), '\t')
-        )}
-        `
-      )
+// /**
+//  * @author Aykut Saki <aykutsakisocial@gmail.com>
+//  * @async
+//  * @function
+//  * @name getGames
+//  * @param {string} country ISO country code
+//  * @param {boolean} includeAll include all offers like DLC's
+//  * @returns currentGames: games that are currently free. nextGames: announced games that will be free.
+//  */
+// export const getGames = async (country: Country = 'US', includeAll: boolean = false) => {
+//   try {
+//     if (country.toUpperCase() !== country)
+//       throw new TypeError(`Country code must be uppercase your code: ${country}`)
+//     const { data } = await axios.get(
+//       `https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?country=${country}`
+//     )
 
-    const { currentGames, nextGames }: Result = data?.data?.Catalog?.searchStore?.elements?.reduce(
-      (acc: Result, curr: OfferGame) => {
-        const isBaseGame = includeAll ? true : curr.offerType === 'BASE_GAME'
+//     if (data?.errors)
+//       throw new Error(
+//         `An error occurred
+//         error: ${data.errors.map((err: any) =>
+//           JSON.stringify(err, Object.getOwnPropertyNames(err), '\t')
+//         )}
+//         `
+//       )
 
-        const hasPromotionalOffers = curr.promotions?.promotionalOffers?.length !== 0
+//     const { currentGames, nextGames }: Result = data?.data?.Catalog?.searchStore?.elements?.reduce(
+//       (acc: Result, curr: OfferGame) => {
+//         const isBaseGame = includeAll ? true : curr.offerType === 'BASE_GAME'
 
-        const hasUpcomingPromotionalOffers =
-          curr.promotions?.upcomingPromotionalOffers?.length !== 0
+//         const hasPromotionalOffers = curr.promotions?.promotionalOffers?.length !== 0
 
-        const isFree = curr.price?.totalPrice?.discountPrice === 0
+//         const hasUpcomingPromotionalOffers =
+//           curr.promotions?.upcomingPromotionalOffers?.length !== 0
 
-        const inThisWeek =
-          moment() >
-            moment(curr.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.startDate) &&
-          moment() < moment(curr.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.endDate)
+//         const isFree = curr.price?.totalPrice?.discountPrice === 0
 
-        const inNextWeek =
-          moment().add(1, 'week') >
-            moment(
-              curr.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0]?.startDate
-            ) &&
-          moment().add(1, 'week') <
-            moment(curr.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0]?.endDate)
+//         const inThisWeek =
+//           moment() >
+//             moment(curr.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.startDate) &&
+//           moment() < moment(curr.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.endDate)
 
-        const willBeFree =
-          curr.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0]?.discountSetting
-            ?.discountPercentage === 0
+//         const inNextWeek =
+//           moment().add(1, 'week') >
+//             moment(
+//               curr.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0]?.startDate
+//             ) &&
+//           moment().add(1, 'week') <
+//             moment(curr.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0]?.endDate)
 
-        if (isBaseGame && hasPromotionalOffers && isFree && inThisWeek)
-          return { ...acc, currentGames: [...acc.currentGames, curr] }
+//         const willBeFree =
+//           curr.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0]?.discountSetting
+//             ?.discountPercentage === 0
 
-        if (isBaseGame && hasUpcomingPromotionalOffers && willBeFree && inNextWeek)
-          return { ...acc, nextGames: [...acc.nextGames, curr] }
+//         if (isBaseGame && hasPromotionalOffers && isFree && inThisWeek)
+//           return { ...acc, currentGames: [...acc.currentGames, curr] }
 
-        return { ...acc }
-      },
-      {
-        currentGames: [],
-        nextGames: []
-      } as Result
-    )
+//         if (isBaseGame && hasUpcomingPromotionalOffers && willBeFree && inNextWeek)
+//           return { ...acc, nextGames: [...acc.nextGames, curr] }
 
-    return { currentGames, nextGames }
-  } catch (error) {
-    throw new Error(error as string)
-  }
-}
+//         return { ...acc }
+//       },
+//       {
+//         currentGames: [],
+//         nextGames: []
+//       } as Result
+//     )
+
+//     return { currentGames, nextGames }
+//   } catch (error) {
+//     throw new Error(error as string)
+//   }
+// }
