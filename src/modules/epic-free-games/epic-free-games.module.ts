@@ -21,8 +21,9 @@ export class EpicFreeGames {
 
   async getGames(options: GetGames = {}): Promise<GetGamesOutput> {
     const country = this.epicFreeGamesUtil.getSafeCountry(options.country)
+    const locale = this.epicFreeGamesUtil.getSafeLocale(options.locale)
 
-    const offerGames: OfferGame[] = await this.epicGames.getGames({ country })
+    const offerGames: OfferGame[] = await this.epicGames.getGames({ country, locale })
 
     const currentGames = this.getCurrentGames({ offerGames, includeAll: options.includeAll })
     const nextGames = this.getNextGames({ offerGames, includeAll: options.includeAll })

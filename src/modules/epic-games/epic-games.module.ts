@@ -6,7 +6,7 @@ export class EpicGames {
   async getGames(options: GetGames) {
     const { data } = await axios.get(
       'https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions',
-      { params: { country: options.country } }
+      { params: { country: options.country, locale: options.locale } }
     )
 
     if (data?.errors)

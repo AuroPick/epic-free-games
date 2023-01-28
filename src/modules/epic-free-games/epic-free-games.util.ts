@@ -10,21 +10,29 @@ import {
   IsFree,
   WillBeFree
 } from './types'
-import { Country } from '../../core'
+import { Country, Locale } from '../../core'
 
 export class EpicFreeGamesUtil {
-  private readonly options: EpicFreeGamesOptions = { country: 'US', includeAll: false }
+  private readonly options: EpicFreeGamesOptions = {
+    country: 'US',
+    includeAll: false,
+    locale: 'en-US'
+  }
 
   constructor(options: EpicFreeGamesOptions) {
     this.options = options
   }
 
   getSafeCountry(country?: Country): Country {
-    return country || this.options.country || 'US'
+    return typeof country === 'string' ? country : this.options.country || 'US'
   }
 
   getSafeIncludeAll(includeAll?: boolean): boolean {
     return typeof includeAll === 'boolean' ? includeAll : this.options.includeAll || false
+  }
+
+  getSafeLocale(locale?: Locale) {
+    return typeof locale === 'string' ? locale : this.options.locale || 'en-US'
   }
 
   isBaseGame(data: IsBaseGame): boolean {

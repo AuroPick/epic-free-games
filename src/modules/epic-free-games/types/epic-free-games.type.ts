@@ -1,13 +1,15 @@
-import { Country, OfferGame } from '../../../core'
+import { Country, Locale, OfferGame } from '../../../core'
 
 export interface EpicFreeGamesOptions {
   readonly country: Country
   readonly includeAll: boolean
+  readonly locale: Locale
 }
 
 export interface GetGames {
   readonly country?: Country
   readonly includeAll?: boolean
+  readonly locale?: Locale
 }
 
 export interface GetGamesOutput {
