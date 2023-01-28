@@ -31,7 +31,7 @@ export class EpicFreeGamesUtil {
     return typeof includeAll === 'boolean' ? includeAll : this.options.includeAll || false
   }
 
-  getSafeLocale(locale?: Locale) {
+  getSafeLocale(locale?: Locale): Locale {
     return typeof locale === 'string' ? locale : this.options.locale || 'en-US'
   }
 
