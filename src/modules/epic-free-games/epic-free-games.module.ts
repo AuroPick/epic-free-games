@@ -9,6 +9,9 @@ import {
 import { OfferGame } from '../../core'
 import { EpicGames } from '../epic-games'
 
+/**
+ * @author Aykut Saki <aykutsakisocial@gmail.com>
+ */
 export class EpicFreeGames {
   private readonly epicFreeGamesUtil: EpicFreeGamesUtil
 
