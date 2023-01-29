@@ -21,15 +21,22 @@ yarn add epic-free-games
 ## Usage
 
 ```js
-const { getGames } = require("epic-free-games");
+const { EpicFreeGames } = require('epic-free-games');
 
 // OR
 
-import { getGames } from "epic-free-games";
+import { EpicFreeGames } from 'epic-free-games';
 
+const epicFreeGames = new EpicFreeGames({ country: 'JP', locale: 'ja', includeAll: true })
 
+epicFreeGames.getGames().then(res => {
+  // Do something
+}).catch(err => {
+  // Do something
+});
 
-getGames("JP", true).then(res => {
+// you can override default options
+epicFreeGames.getGames({ country: 'DE', locale: 'de', includeAll: false }).then(res => {
   // Do something
 }).catch(err => {
   // Do something
@@ -42,6 +49,7 @@ getGames("JP", true).then(res => {
 | Function    | Parameter             | Parameter Values                                                                               | Default Value  |
 | :---------: | :-------------------: | :--------------------------------------------------------------------------------------------: | :------------: |
 | getGames    | country: `string`     | "TR", "US", "GB", "DE", "AR", "ES", "MX", "FR", "IT", "JP", "KR", "PL", "BR", "RU", "TH", "CN", "IN", "GR" | "US"           |
+| getGames    | locale: `string`      | "tr", "ja", "ar", "de", "en-US", "es-ES", "es-MX", "fr", "it", "ko", "pl", "pt-BR", "ru", "th", "zh-CN", "zh-Hant" | "en-US"           |
 | getGames    | includeAll: `boolean` | true \| false                                                                                  | false          |
 
 ## Sample Output

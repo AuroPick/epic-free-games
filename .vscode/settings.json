@@ -1,0 +1,46 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "files.eol": "\n",
+  "editor.wordWrap": "on",
+  "editor.fontLigatures": true,
+  "editor.formatOnPaste": true,
+  "editor.tabSize": 2,
+  "files.autoSave": "afterDelay",
+  "diffEditor.wordWrap": "on",
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "terminal.integrated.scrollback": 100000,
+  "editor.bracketPairColorization.enabled": true,
+  "prettier.bracketSameLine": true,
+  "editor.detectIndentation": false,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
