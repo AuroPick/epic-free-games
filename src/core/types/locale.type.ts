@@ -1,3 +1,6 @@
+/**
+ * supported country list
+ */
 export type Locale =
   | 'tr'
   | 'ja'

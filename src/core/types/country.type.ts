@@ -1,7 +1,6 @@
 /**
  * supported country list
  */
-
 export type Country =
   | 'TR'
   | 'US'
