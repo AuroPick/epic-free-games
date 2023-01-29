@@ -1,3 +1,4 @@
+import deepmergeModule from '@fastify/deepmerge'
 import dayjs from 'dayjs'
 
 import {
@@ -12,6 +13,8 @@ import {
 } from './types'
 import { Country, Locale } from '../../core'
 
+const deepmerge = deepmergeModule()
+
 export class EpicFreeGamesUtil {
   private readonly options: EpicFreeGamesOptions = {
     country: 'US',
@@ -20,7 +23,7 @@ export class EpicFreeGamesUtil {
   }
 
   constructor(options: EpicFreeGamesOptions) {
-    this.options = options
+    this.options = deepmerge(this.options, options)
   }
 
   getSafeCountry(country?: Country): Country {
