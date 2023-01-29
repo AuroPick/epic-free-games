@@ -1,8 +1,8 @@
 {
   "name": "epic-free-games",
-  "version": "3.1.1",
+  "version": "4.0.1",
   "description": "Get weekly Epic Games free games",
-  "main": "dist/index.js",
+  "main": "dist",
   "types": "dist",
   "scripts": {
     "build": "tsc -p ."
