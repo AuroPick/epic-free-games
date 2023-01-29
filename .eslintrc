@@ -1,0 +1,17 @@
+{
+  "extends": ["@gokarma/karma-social-typescript"],
+  "rules": {
+    "@gokarma/react-native/no-unused-styles": "off",
+    "@gokarma/react-native/no-inline-styles": "off",
+    "@gokarma/react-native/no-color-literals": "off",
+    "@gokarma/react-native/sort-styles": "off",
+    "@gokarma/react-native/split-platform-components": "off",
+    "@gokarma/react-native/no-raw-text": "off",
+    "@gokarma/react-native/no-single-element-style-arrays": "off",
+    "jsx-a11y/click-events-have-key-events": "off"
+  },
+  "env": {
+    "node": true,
+    "jest": true
+  }
+}
