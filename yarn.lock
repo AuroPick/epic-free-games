@@ -125,6 +125,11 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@fastify/deepmerge@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@fastify/deepmerge/-/deepmerge-1.3.0.tgz#8116858108f0c7d9fd460d05a7d637a13fe3239a"
+  integrity sha512-J8TOSBq3SoZbDhM9+R/u77hP93gz/rajSA+K2kGyijPpORPWUXHUpTaleoj+92As0S9uPRP7Oi8IqMf0u+ro6A==
+
 "@gokarma/eslint-config-karma-social-typescript@^1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@gokarma/eslint-config-karma-social-typescript/-/eslint-config-karma-social-typescript-1.0.4.tgz#7847af7897aab4132a6f8a28fcdbbe8854a9aa78"
