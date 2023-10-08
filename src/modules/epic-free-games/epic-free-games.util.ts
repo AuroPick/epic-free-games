@@ -22,7 +22,7 @@ export class EpicFreeGamesUtil {
     locale: 'en-US'
   }
 
-  constructor(options: EpicFreeGamesOptions) {
+  constructor(options: EpicFreeGamesOptions = {}) {
     this.options = deepmerge(this.options, options)
   }
 

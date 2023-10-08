@@ -12,7 +12,7 @@ export class EpicGames {
       }
     )
 
-    if (data?.errors)
+    if (data?.errors && !data?.data?.Catalog?.searchStore)
       throw new Error(
         `An error occurred
         error: ${data.errors.map((err: any) =>

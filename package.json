@@ -1,6 +1,6 @@
 {
   "name": "epic-free-games",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Get weekly Epic Games free games",
   "main": "dist",
   "types": "dist",

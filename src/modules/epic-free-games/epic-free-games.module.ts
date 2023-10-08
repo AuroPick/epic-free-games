@@ -17,7 +17,7 @@ export class EpicFreeGames {
 
   private readonly epicGames: EpicGames
 
-  constructor(options: EpicFreeGamesOptions) {
+  constructor(options: EpicFreeGamesOptions = {}) {
     this.epicFreeGamesUtil = new EpicFreeGamesUtil(options)
     this.epicGames = new EpicGames()
   }
