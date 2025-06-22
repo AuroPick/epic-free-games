@@ -1,3 +1,5 @@
+import fetch from 'node-fetch'
+
 import { GetGames } from './types'
 
 export class EpicGames {

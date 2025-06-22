@@ -1,23 +1,20 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Create React App",
-  "_version": "2.0.0",
-
+  "display": "Node LTS (22)",
+  "_version": "22.0.0",
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "target": "es2015",
-
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "lib": ["es2023"],
+    "module": "nodenext",
+    "target": "es2022",
+    "strict": true,
     "esModuleInterop": true,
-    "isolatedModules": true,
-    "jsx": "react-jsx",
-    "noEmit": true,
-    "noFallthroughCasesInSwitch": true,
-    "resolveJsonModule": true,
     "skipLibCheck": true,
-    "strict": true
-  }
+    "moduleResolution": "node16",
+    "noUncheckedIndexedAccess": true,
+    "composite": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }
