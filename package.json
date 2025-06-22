@@ -1,9 +1,14 @@
 {
   "name": "epic-free-games",
-  "version": "4.1.1",
+  "version": "4.1.2",
   "description": "Get weekly Epic Games free games",
-  "main": "dist",
-  "types": "dist",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "!*.d.ts",
+    "!*.map"
+  ],
   "scripts": {
     "build": "tsc -p ."
   },
@@ -38,10 +43,5 @@
   },
   "engines": {
     "node": ">=18.0.0"
-  },
-  "files": [
-    "dist",
-    "!*.d.ts",
-    "!*.map"
-  ]
+  }
 }
