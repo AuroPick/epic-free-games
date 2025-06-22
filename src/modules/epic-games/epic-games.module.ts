@@ -1,16 +1,21 @@
-import axios from 'axios'
-
 import { GetGames } from './types'
 
 export class EpicGames {
   async getGames(options: GetGames) {
-    const { data } = await axios.get(
-      'https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions',
-      {
-        params: { country: options.country, locale: options.locale },
-        headers: { 'Access-Control-Allow-Origin': '*' }
-      }
-    )
+    const url = new URL('https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions')
+
+    url.searchParams.set('country', options.country)
+    url.searchParams.set('locale', options.locale)
+
+    const response = await fetch(url.toString(), {
+      headers: { 'Access-Control-Allow-Origin': '*' }
+    })
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const data = (await response.json()) as any
 
     if (data?.errors && !data?.data?.Catalog?.searchStore)
       throw new Error(
