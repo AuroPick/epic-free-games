@@ -1,6 +1,6 @@
 {
   "name": "epic-free-games",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "Get weekly Epic Games free games",
   "main": "dist",
   "types": "dist",
@@ -37,7 +37,7 @@
     "dayjs": "^1.11.7"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=18.0.0"
   },
   "files": [
     "dist",
