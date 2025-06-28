@@ -5,7 +5,8 @@ export interface OfferGame {
   description: string
   effectiveDate: string
   offerType: string
-  expiryDate: boolean
+  expiryDate: boolean | null
+  viewableDate: string
   status: string
   isCodeRedemptionOnly: boolean
   keyImages: {
@@ -16,9 +17,9 @@ export interface OfferGame {
     id: string
     name: string
   }
-  productSlug: string
+  productSlug: string | null
   urlSlug: string
-  url: boolean
+  url: boolean | null
   items: {
     id: string
     namespace: string
@@ -32,6 +33,16 @@ export interface OfferGame {
   }[]
   tags: {
     id: string
+  }[]
+  catalogNs: {
+    mappings: {
+      pageSlug: string
+      pageType: string
+    }[]
+  }
+  offerMappings: {
+    pageSlug: string
+    pageType: string
   }[]
   price: {
     totalPrice: {
@@ -49,7 +60,15 @@ export interface OfferGame {
         intermediatePrice: string
       }
     }
-    lineOffers: { appliedRules: [] }[]
+    lineOffers: { 
+      appliedRules: { 
+        id: string; 
+        endDate: string 
+        discountSetting: {
+          discountType: string
+        }
+      }[] 
+    }[]
   }
   promotions: {
     promotionalOffers: {
